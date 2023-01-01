@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nmefc.observice_service.dao.BuoyDataMapper">
+  <resultMap id="BaseResultMap" type="com.nmefc.observice_service.bean.BuoyData">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="query_time" jdbcType="TIMESTAMP" property="queryTime" />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+    <result column="site" jdbcType="VARCHAR" property="site" />
+    <result column="create" jdbcType="TIMESTAMP" property="create" />
+    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="ws" jdbcType="DECIMAL" property="ws" />
+    <result column="wd" jdbcType="DECIMAL" property="wd" />
+    <result column="wsm" jdbcType="DECIMAL" property="wsm" />
+    <result column="at" jdbcType="DECIMAL" property="at" />
+    <result column="bp" jdbcType="DECIMAL" property="bp" />
+    <result column="hu" jdbcType="DECIMAL" property="hu" />
+    <result column="wt" jdbcType="DECIMAL" property="wt" />
+    <result column="sl" jdbcType="DECIMAL" property="sl" />
+    <result column="bg" jdbcType="DECIMAL" property="bg" />
+    <result column="bx" jdbcType="DECIMAL" property="bx" />
+    <result column="zq" jdbcType="DECIMAL" property="zq" />
+    <result column="ybg" jdbcType="DECIMAL" property="ybg" />
+    <result column="yzq" jdbcType="DECIMAL" property="yzq" />
+    <result column="tenthbg" jdbcType="DECIMAL" property="tenthbg" />
+    <result column="tenthzq" jdbcType="DECIMAL" property="tenthzq" />
+    <result column="zbg" jdbcType="DECIMAL" property="zbg" />
+    <result column="zzq" jdbcType="DECIMAL" property="zzq" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, query_time, time, site, create, modified, is_delete, ws, wd, wsm, at, bp, hu, 
+    wt, sl, bg, bx, zq, ybg, yzq, tenthbg, tenthzq, zbg, zzq
+  </sql>
+  <select id="selectByExample" parameterType="com.nmefc.observice_service.bean.BuoyDataExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from buoy_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buoy_data
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from buoy_data
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nmefc.observice_service.bean.BuoyDataExample">
+    delete from buoy_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nmefc.observice_service.bean.BuoyData">
+    insert into buoy_data (id, query_time, time, 
+      site, create, modified, 
+      is_delete, ws, wd, wsm, 
+      at, bp, hu, wt, 
+      sl, bg, bx, zq, 
+      ybg, yzq, tenthbg, 
+      tenthzq, zbg, zzq)
+    values (#{id,jdbcType=BIGINT}, #{queryTime,jdbcType=TIMESTAMP}, #{time,jdbcType=VARCHAR}, 
+      #{site,jdbcType=VARCHAR}, #{create,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}, 
+      #{isDelete,jdbcType=TINYINT}, #{ws,jdbcType=DECIMAL}, #{wd,jdbcType=DECIMAL}, #{wsm,jdbcType=DECIMAL}, 
+      #{at,jdbcType=DECIMAL}, #{bp,jdbcType=DECIMAL}, #{hu,jdbcType=DECIMAL}, #{wt,jdbcType=DECIMAL}, 
+      #{sl,jdbcType=DECIMAL}, #{bg,jdbcType=DECIMAL}, #{bx,jdbcType=DECIMAL}, #{zq,jdbcType=DECIMAL}, 
+      #{ybg,jdbcType=DECIMAL}, #{yzq,jdbcType=DECIMAL}, #{tenthbg,jdbcType=DECIMAL}, 
+      #{tenthzq,jdbcType=DECIMAL}, #{zbg,jdbcType=DECIMAL}, #{zzq,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nmefc.observice_service.bean.BuoyData">
+    insert into buoy_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="queryTime != null">
+        query_time,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="site != null">
+        site,
+      </if>
+      <if test="create != null">
+        create,
+      </if>
+      <if test="modified != null">
+        modified,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="ws != null">
+        ws,
+      </if>
+      <if test="wd != null">
+        wd,
+      </if>
+      <if test="wsm != null">
+        wsm,
+      </if>
+      <if test="at != null">
+        at,
+      </if>
+      <if test="bp != null">
+        bp,
+      </if>
+      <if test="hu != null">
+        hu,
+      </if>
+      <if test="wt != null">
+        wt,
+      </if>
+      <if test="sl != null">
+        sl,
+      </if>
+      <if test="bg != null">
+        bg,
+      </if>
+      <if test="bx != null">
+        bx,
+      </if>
+      <if test="zq != null">
+        zq,
+      </if>
+      <if test="ybg != null">
+        ybg,
+      </if>
+      <if test="yzq != null">
+        yzq,
+      </if>
+      <if test="tenthbg != null">
+        tenthbg,
+      </if>
+      <if test="tenthzq != null">
+        tenthzq,
+      </if>
+      <if test="zbg != null">
+        zbg,
+      </if>
+      <if test="zzq != null">
+        zzq,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="queryTime != null">
+        #{queryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null">
+        #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="create != null">
+        #{create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="ws != null">
+        #{ws,jdbcType=DECIMAL},
+      </if>
+      <if test="wd != null">
+        #{wd,jdbcType=DECIMAL},
+      </if>
+      <if test="wsm != null">
+        #{wsm,jdbcType=DECIMAL},
+      </if>
+      <if test="at != null">
+        #{at,jdbcType=DECIMAL},
+      </if>
+      <if test="bp != null">
+        #{bp,jdbcType=DECIMAL},
+      </if>
+      <if test="hu != null">
+        #{hu,jdbcType=DECIMAL},
+      </if>
+      <if test="wt != null">
+        #{wt,jdbcType=DECIMAL},
+      </if>
+      <if test="sl != null">
+        #{sl,jdbcType=DECIMAL},
+      </if>
+      <if test="bg != null">
+        #{bg,jdbcType=DECIMAL},
+      </if>
+      <if test="bx != null">
+        #{bx,jdbcType=DECIMAL},
+      </if>
+      <if test="zq != null">
+        #{zq,jdbcType=DECIMAL},
+      </if>
+      <if test="ybg != null">
+        #{ybg,jdbcType=DECIMAL},
+      </if>
+      <if test="yzq != null">
+        #{yzq,jdbcType=DECIMAL},
+      </if>
+      <if test="tenthbg != null">
+        #{tenthbg,jdbcType=DECIMAL},
+      </if>
+      <if test="tenthzq != null">
+        #{tenthzq,jdbcType=DECIMAL},
+      </if>
+      <if test="zbg != null">
+        #{zbg,jdbcType=DECIMAL},
+      </if>
+      <if test="zzq != null">
+        #{zzq,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nmefc.observice_service.bean.BuoyDataExample" resultType="java.lang.Long">
+    select count(*) from buoy_data
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update buoy_data
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.queryTime != null">
+        query_time = #{record.queryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=VARCHAR},
+      </if>
+      <if test="record.site != null">
+        site = #{record.site,jdbcType=VARCHAR},
+      </if>
+      <if test="record.create != null">
+        create = #{record.create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modified != null">
+        modified = #{record.modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDelete != null">
+        is_delete = #{record.isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="record.ws != null">
+        ws = #{record.ws,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wd != null">
+        wd = #{record.wd,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wsm != null">
+        wsm = #{record.wsm,jdbcType=DECIMAL},
+      </if>
+      <if test="record.at != null">
+        at = #{record.at,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bp != null">
+        bp = #{record.bp,jdbcType=DECIMAL},
+      </if>
+      <if test="record.hu != null">
+        hu = #{record.hu,jdbcType=DECIMAL},
+      </if>
+      <if test="record.wt != null">
+        wt = #{record.wt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sl != null">
+        sl = #{record.sl,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bg != null">
+        bg = #{record.bg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.bx != null">
+        bx = #{record.bx,jdbcType=DECIMAL},
+      </if>
+      <if test="record.zq != null">
+        zq = #{record.zq,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ybg != null">
+        ybg = #{record.ybg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yzq != null">
+        yzq = #{record.yzq,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tenthbg != null">
+        tenthbg = #{record.tenthbg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tenthzq != null">
+        tenthzq = #{record.tenthzq,jdbcType=DECIMAL},
+      </if>
+      <if test="record.zbg != null">
+        zbg = #{record.zbg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.zzq != null">
+        zzq = #{record.zzq,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update buoy_data
+    set id = #{record.id,jdbcType=BIGINT},
+      query_time = #{record.queryTime,jdbcType=TIMESTAMP},
+      time = #{record.time,jdbcType=VARCHAR},
+      site = #{record.site,jdbcType=VARCHAR},
+      create = #{record.create,jdbcType=TIMESTAMP},
+      modified = #{record.modified,jdbcType=TIMESTAMP},
+      is_delete = #{record.isDelete,jdbcType=TINYINT},
+      ws = #{record.ws,jdbcType=DECIMAL},
+      wd = #{record.wd,jdbcType=DECIMAL},
+      wsm = #{record.wsm,jdbcType=DECIMAL},
+      at = #{record.at,jdbcType=DECIMAL},
+      bp = #{record.bp,jdbcType=DECIMAL},
+      hu = #{record.hu,jdbcType=DECIMAL},
+      wt = #{record.wt,jdbcType=DECIMAL},
+      sl = #{record.sl,jdbcType=DECIMAL},
+      bg = #{record.bg,jdbcType=DECIMAL},
+      bx = #{record.bx,jdbcType=DECIMAL},
+      zq = #{record.zq,jdbcType=DECIMAL},
+      ybg = #{record.ybg,jdbcType=DECIMAL},
+      yzq = #{record.yzq,jdbcType=DECIMAL},
+      tenthbg = #{record.tenthbg,jdbcType=DECIMAL},
+      tenthzq = #{record.tenthzq,jdbcType=DECIMAL},
+      zbg = #{record.zbg,jdbcType=DECIMAL},
+      zzq = #{record.zzq,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nmefc.observice_service.bean.BuoyData">
+    update buoy_data
+    <set>
+      <if test="queryTime != null">
+        query_time = #{queryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null">
+        site = #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="create != null">
+        create = #{create,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modified != null">
+        modified = #{modified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="ws != null">
+        ws = #{ws,jdbcType=DECIMAL},
+      </if>
+      <if test="wd != null">
+        wd = #{wd,jdbcType=DECIMAL},
+      </if>
+      <if test="wsm != null">
+        wsm = #{wsm,jdbcType=DECIMAL},
+      </if>
+      <if test="at != null">
+        at = #{at,jdbcType=DECIMAL},
+      </if>
+      <if test="bp != null">
+        bp = #{bp,jdbcType=DECIMAL},
+      </if>
+      <if test="hu != null">
+        hu = #{hu,jdbcType=DECIMAL},
+      </if>
+      <if test="wt != null">
+        wt = #{wt,jdbcType=DECIMAL},
+      </if>
+      <if test="sl != null">
+        sl = #{sl,jdbcType=DECIMAL},
+      </if>
+      <if test="bg != null">
+        bg = #{bg,jdbcType=DECIMAL},
+      </if>
+      <if test="bx != null">
+        bx = #{bx,jdbcType=DECIMAL},
+      </if>
+      <if test="zq != null">
+        zq = #{zq,jdbcType=DECIMAL},
+      </if>
+      <if test="ybg != null">
+        ybg = #{ybg,jdbcType=DECIMAL},
+      </if>
+      <if test="yzq != null">
+        yzq = #{yzq,jdbcType=DECIMAL},
+      </if>
+      <if test="tenthbg != null">
+        tenthbg = #{tenthbg,jdbcType=DECIMAL},
+      </if>
+      <if test="tenthzq != null">
+        tenthzq = #{tenthzq,jdbcType=DECIMAL},
+      </if>
+      <if test="zbg != null">
+        zbg = #{zbg,jdbcType=DECIMAL},
+      </if>
+      <if test="zzq != null">
+        zzq = #{zzq,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nmefc.observice_service.bean.BuoyData">
+    update buoy_data
+    set query_time = #{queryTime,jdbcType=TIMESTAMP},
+      time = #{time,jdbcType=VARCHAR},
+      site = #{site,jdbcType=VARCHAR},
+      create = #{create,jdbcType=TIMESTAMP},
+      modified = #{modified,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      ws = #{ws,jdbcType=DECIMAL},
+      wd = #{wd,jdbcType=DECIMAL},
+      wsm = #{wsm,jdbcType=DECIMAL},
+      at = #{at,jdbcType=DECIMAL},
+      bp = #{bp,jdbcType=DECIMAL},
+      hu = #{hu,jdbcType=DECIMAL},
+      wt = #{wt,jdbcType=DECIMAL},
+      sl = #{sl,jdbcType=DECIMAL},
+      bg = #{bg,jdbcType=DECIMAL},
+      bx = #{bx,jdbcType=DECIMAL},
+      zq = #{zq,jdbcType=DECIMAL},
+      ybg = #{ybg,jdbcType=DECIMAL},
+      yzq = #{yzq,jdbcType=DECIMAL},
+      tenthbg = #{tenthbg,jdbcType=DECIMAL},
+      tenthzq = #{tenthzq,jdbcType=DECIMAL},
+      zbg = #{zbg,jdbcType=DECIMAL},
+      zzq = #{zzq,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
