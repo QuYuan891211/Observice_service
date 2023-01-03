@@ -1,7 +1,7 @@
-package com.nmefc.observice_service.dao;
+package com.nmefc.observe_service.mapper;
 
-import com.nmefc.observice_service.bean.BuoyData;
-import com.nmefc.observice_service.bean.BuoyDataExample;
+import com.nmefc.observe_service.bean.BuoyData;
+import com.nmefc.observe_service.bean.BuoyDataExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

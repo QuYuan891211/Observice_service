@@ -1,4 +1,4 @@
-package com.nmefc.observice_service.bean;
+package com.nmefc.observe_service.bean;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,11 +8,11 @@ public class BuoyData {
 
     private Date queryTime;
 
-    private String time;
+    private String recordTime;
 
     private String site;
 
-    private Date create;
+    private Date createTime;
 
     private Date modified;
 
@@ -24,7 +24,7 @@ public class BuoyData {
 
     private BigDecimal wsm;
 
-    private BigDecimal at;
+    private BigDecimal att;
 
     private BigDecimal bp;
 
@@ -68,12 +68,12 @@ public class BuoyData {
         this.queryTime = queryTime;
     }
 
-    public String getTime() {
-        return time;
+    public String getRecordTime() {
+        return recordTime;
     }
 
-    public void setTime(String time) {
-        this.time = time == null ? null : time.trim();
+    public void setRecordTime(String recordTime) {
+        this.recordTime = recordTime == null ? null : recordTime.trim();
     }
 
     public String getSite() {
@@ -84,12 +84,12 @@ public class BuoyData {
         this.site = site == null ? null : site.trim();
     }
 
-    public Date getCreate() {
-        return create;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate(Date create) {
-        this.create = create;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Date getModified() {
@@ -132,12 +132,12 @@ public class BuoyData {
         this.wsm = wsm;
     }
 
-    public BigDecimal getAt() {
-        return at;
+    public BigDecimal getAtt() {
+        return att;
     }
 
-    public void setAt(BigDecimal at) {
-        this.at = at;
+    public void setAtt(BigDecimal att) {
+        this.att = att;
     }
 
     public BigDecimal getBp() {

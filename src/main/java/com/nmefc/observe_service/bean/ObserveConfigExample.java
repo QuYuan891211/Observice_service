@@ -1,4 +1,4 @@
-package com.nmefc.observice_service.bean;
+package com.nmefc.observe_service.bean;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

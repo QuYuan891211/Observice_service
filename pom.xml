@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.nmefc</groupId>
-    <artifactId>Observice_service</artifactId>
+    <artifactId>Observe_service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Observe_service</name>
     <description></description>

@@ -1,7 +1,7 @@
-package com.nmefc.observice_service.dao;
+package com.nmefc.observe_service.mapper;
 
-import com.nmefc.observice_service.bean.ObserveConfig;
-import com.nmefc.observice_service.bean.ObserveConfigExample;
+import com.nmefc.observe_service.bean.ObserveConfig;
+import com.nmefc.observe_service.bean.ObserveConfigExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

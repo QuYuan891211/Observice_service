@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.nmefc.observice_service.dao.BuoyDataMapper">
-  <resultMap id="BaseResultMap" type="com.nmefc.observice_service.bean.BuoyData">
+<mapper namespace="com.nmefc.observe_service.mapper.BuoyDataMapper">
+  <resultMap id="BaseResultMap" type="com.nmefc.observe_service.bean.BuoyData">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="query_time" jdbcType="TIMESTAMP" property="queryTime" />
-    <result column="time" jdbcType="VARCHAR" property="time" />
+    <result column="record_time" jdbcType="VARCHAR" property="recordTime" />
     <result column="site" jdbcType="VARCHAR" property="site" />
-    <result column="create" jdbcType="TIMESTAMP" property="create" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="modified" jdbcType="TIMESTAMP" property="modified" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
     <result column="ws" jdbcType="DECIMAL" property="ws" />
     <result column="wd" jdbcType="DECIMAL" property="wd" />
     <result column="wsm" jdbcType="DECIMAL" property="wsm" />
-    <result column="at" jdbcType="DECIMAL" property="at" />
+    <result column="att" jdbcType="DECIMAL" property="att" />
     <result column="bp" jdbcType="DECIMAL" property="bp" />
     <result column="hu" jdbcType="DECIMAL" property="hu" />
     <result column="wt" jdbcType="DECIMAL" property="wt" />
@@ -86,10 +86,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, query_time, time, site, create, modified, is_delete, ws, wd, wsm, at, bp, hu, 
-    wt, sl, bg, bx, zq, ybg, yzq, tenthbg, tenthzq, zbg, zzq
+    id, query_time, record_time, site, create_time, modified, is_delete, ws, wd, wsm, 
+    att, bp, hu, wt, sl, bg, bx, zq, ybg, yzq, tenthbg, tenthzq, zbg, zzq
   </sql>
-  <select id="selectByExample" parameterType="com.nmefc.observice_service.bean.BuoyDataExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.nmefc.observe_service.bean.BuoyDataExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -113,29 +113,29 @@
     delete from buoy_data
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.nmefc.observice_service.bean.BuoyDataExample">
+  <delete id="deleteByExample" parameterType="com.nmefc.observe_service.bean.BuoyDataExample">
     delete from buoy_data
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.nmefc.observice_service.bean.BuoyData">
-    insert into buoy_data (id, query_time, time, 
-      site, create, modified, 
+  <insert id="insert" parameterType="com.nmefc.observe_service.bean.BuoyData">
+    insert into buoy_data (id, query_time, record_time, 
+      site, create_time, modified, 
       is_delete, ws, wd, wsm, 
-      at, bp, hu, wt, 
+      att, bp, hu, wt, 
       sl, bg, bx, zq, 
       ybg, yzq, tenthbg, 
       tenthzq, zbg, zzq)
-    values (#{id,jdbcType=BIGINT}, #{queryTime,jdbcType=TIMESTAMP}, #{time,jdbcType=VARCHAR}, 
-      #{site,jdbcType=VARCHAR}, #{create,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=BIGINT}, #{queryTime,jdbcType=TIMESTAMP}, #{recordTime,jdbcType=VARCHAR}, 
+      #{site,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modified,jdbcType=TIMESTAMP}, 
       #{isDelete,jdbcType=TINYINT}, #{ws,jdbcType=DECIMAL}, #{wd,jdbcType=DECIMAL}, #{wsm,jdbcType=DECIMAL}, 
-      #{at,jdbcType=DECIMAL}, #{bp,jdbcType=DECIMAL}, #{hu,jdbcType=DECIMAL}, #{wt,jdbcType=DECIMAL}, 
+      #{att,jdbcType=DECIMAL}, #{bp,jdbcType=DECIMAL}, #{hu,jdbcType=DECIMAL}, #{wt,jdbcType=DECIMAL}, 
       #{sl,jdbcType=DECIMAL}, #{bg,jdbcType=DECIMAL}, #{bx,jdbcType=DECIMAL}, #{zq,jdbcType=DECIMAL}, 
       #{ybg,jdbcType=DECIMAL}, #{yzq,jdbcType=DECIMAL}, #{tenthbg,jdbcType=DECIMAL}, 
       #{tenthzq,jdbcType=DECIMAL}, #{zbg,jdbcType=DECIMAL}, #{zzq,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.nmefc.observice_service.bean.BuoyData">
+  <insert id="insertSelective" parameterType="com.nmefc.observe_service.bean.BuoyData">
     insert into buoy_data
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -144,14 +144,14 @@
       <if test="queryTime != null">
         query_time,
       </if>
-      <if test="time != null">
-        time,
+      <if test="recordTime != null">
+        record_time,
       </if>
       <if test="site != null">
         site,
       </if>
-      <if test="create != null">
-        create,
+      <if test="createTime != null">
+        create_time,
       </if>
       <if test="modified != null">
         modified,
@@ -168,8 +168,8 @@
       <if test="wsm != null">
         wsm,
       </if>
-      <if test="at != null">
-        at,
+      <if test="att != null">
+        att,
       </if>
       <if test="bp != null">
         bp,
@@ -218,14 +218,14 @@
       <if test="queryTime != null">
         #{queryTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="time != null">
-        #{time,jdbcType=VARCHAR},
+      <if test="recordTime != null">
+        #{recordTime,jdbcType=VARCHAR},
       </if>
       <if test="site != null">
         #{site,jdbcType=VARCHAR},
       </if>
-      <if test="create != null">
-        #{create,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="modified != null">
         #{modified,jdbcType=TIMESTAMP},
@@ -242,8 +242,8 @@
       <if test="wsm != null">
         #{wsm,jdbcType=DECIMAL},
       </if>
-      <if test="at != null">
-        #{at,jdbcType=DECIMAL},
+      <if test="att != null">
+        #{att,jdbcType=DECIMAL},
       </if>
       <if test="bp != null">
         #{bp,jdbcType=DECIMAL},
@@ -286,7 +286,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.nmefc.observice_service.bean.BuoyDataExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.nmefc.observe_service.bean.BuoyDataExample" resultType="java.lang.Long">
     select count(*) from buoy_data
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -301,14 +301,14 @@
       <if test="record.queryTime != null">
         query_time = #{record.queryTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.time != null">
-        time = #{record.time,jdbcType=VARCHAR},
+      <if test="record.recordTime != null">
+        record_time = #{record.recordTime,jdbcType=VARCHAR},
       </if>
       <if test="record.site != null">
         site = #{record.site,jdbcType=VARCHAR},
       </if>
-      <if test="record.create != null">
-        create = #{record.create,jdbcType=TIMESTAMP},
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.modified != null">
         modified = #{record.modified,jdbcType=TIMESTAMP},
@@ -325,8 +325,8 @@
       <if test="record.wsm != null">
         wsm = #{record.wsm,jdbcType=DECIMAL},
       </if>
-      <if test="record.at != null">
-        at = #{record.at,jdbcType=DECIMAL},
+      <if test="record.att != null">
+        att = #{record.att,jdbcType=DECIMAL},
       </if>
       <if test="record.bp != null">
         bp = #{record.bp,jdbcType=DECIMAL},
@@ -376,15 +376,15 @@
     update buoy_data
     set id = #{record.id,jdbcType=BIGINT},
       query_time = #{record.queryTime,jdbcType=TIMESTAMP},
-      time = #{record.time,jdbcType=VARCHAR},
+      record_time = #{record.recordTime,jdbcType=VARCHAR},
       site = #{record.site,jdbcType=VARCHAR},
-      create = #{record.create,jdbcType=TIMESTAMP},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       modified = #{record.modified,jdbcType=TIMESTAMP},
       is_delete = #{record.isDelete,jdbcType=TINYINT},
       ws = #{record.ws,jdbcType=DECIMAL},
       wd = #{record.wd,jdbcType=DECIMAL},
       wsm = #{record.wsm,jdbcType=DECIMAL},
-      at = #{record.at,jdbcType=DECIMAL},
+      att = #{record.att,jdbcType=DECIMAL},
       bp = #{record.bp,jdbcType=DECIMAL},
       hu = #{record.hu,jdbcType=DECIMAL},
       wt = #{record.wt,jdbcType=DECIMAL},
@@ -402,20 +402,20 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.nmefc.observice_service.bean.BuoyData">
+  <update id="updateByPrimaryKeySelective" parameterType="com.nmefc.observe_service.bean.BuoyData">
     update buoy_data
     <set>
       <if test="queryTime != null">
         query_time = #{queryTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="time != null">
-        time = #{time,jdbcType=VARCHAR},
+      <if test="recordTime != null">
+        record_time = #{recordTime,jdbcType=VARCHAR},
       </if>
       <if test="site != null">
         site = #{site,jdbcType=VARCHAR},
       </if>
-      <if test="create != null">
-        create = #{create,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="modified != null">
         modified = #{modified,jdbcType=TIMESTAMP},
@@ -432,8 +432,8 @@
       <if test="wsm != null">
         wsm = #{wsm,jdbcType=DECIMAL},
       </if>
-      <if test="at != null">
-        at = #{at,jdbcType=DECIMAL},
+      <if test="att != null">
+        att = #{att,jdbcType=DECIMAL},
       </if>
       <if test="bp != null">
         bp = #{bp,jdbcType=DECIMAL},
@@ -477,18 +477,18 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.nmefc.observice_service.bean.BuoyData">
+  <update id="updateByPrimaryKey" parameterType="com.nmefc.observe_service.bean.BuoyData">
     update buoy_data
     set query_time = #{queryTime,jdbcType=TIMESTAMP},
-      time = #{time,jdbcType=VARCHAR},
+      record_time = #{recordTime,jdbcType=VARCHAR},
       site = #{site,jdbcType=VARCHAR},
-      create = #{create,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       modified = #{modified,jdbcType=TIMESTAMP},
       is_delete = #{isDelete,jdbcType=TINYINT},
       ws = #{ws,jdbcType=DECIMAL},
       wd = #{wd,jdbcType=DECIMAL},
       wsm = #{wsm,jdbcType=DECIMAL},
-      at = #{at,jdbcType=DECIMAL},
+      att = #{att,jdbcType=DECIMAL},
       bp = #{bp,jdbcType=DECIMAL},
       hu = #{hu,jdbcType=DECIMAL},
       wt = #{wt,jdbcType=DECIMAL},

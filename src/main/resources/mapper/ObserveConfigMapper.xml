@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.nmefc.observice_service.dao.ObserveConfigMapper">
-  <resultMap id="BaseResultMap" type="com.nmefc.observice_service.bean.ObserveConfig">
+<mapper namespace="com.nmefc.observe_service.mapper.ObserveConfigMapper">
+  <resultMap id="BaseResultMap" type="com.nmefc.observe_service.bean.ObserveConfig">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
@@ -74,7 +74,7 @@
   <sql id="Base_Column_List">
     id, name, is_delete, create, modified, lon, lat, dist, area, remark
   </sql>
-  <select id="selectByExample" parameterType="com.nmefc.observice_service.bean.ObserveConfigExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.nmefc.observe_service.bean.ObserveConfigExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -98,13 +98,13 @@
     delete from observe_config
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.nmefc.observice_service.bean.ObserveConfigExample">
+  <delete id="deleteByExample" parameterType="com.nmefc.observe_service.bean.ObserveConfigExample">
     delete from observe_config
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.nmefc.observice_service.bean.ObserveConfig">
+  <insert id="insert" parameterType="com.nmefc.observe_service.bean.ObserveConfig">
     insert into observe_config (id, name, is_delete, 
       create, modified, lon, 
       lat, dist, area, remark
@@ -114,7 +114,7 @@
       #{lat,jdbcType=DECIMAL}, #{dist,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.nmefc.observice_service.bean.ObserveConfig">
+  <insert id="insertSelective" parameterType="com.nmefc.observe_service.bean.ObserveConfig">
     insert into observe_config
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -181,7 +181,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.nmefc.observice_service.bean.ObserveConfigExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.nmefc.observe_service.bean.ObserveConfigExample" resultType="java.lang.Long">
     select count(*) from observe_config
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -241,7 +241,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.nmefc.observice_service.bean.ObserveConfig">
+  <update id="updateByPrimaryKeySelective" parameterType="com.nmefc.observe_service.bean.ObserveConfig">
     update observe_config
     <set>
       <if test="name != null">
@@ -274,7 +274,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.nmefc.observice_service.bean.ObserveConfig">
+  <update id="updateByPrimaryKey" parameterType="com.nmefc.observe_service.bean.ObserveConfig">
     update observe_config
     set name = #{name,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=TINYINT},

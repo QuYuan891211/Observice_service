@@ -1,4 +1,4 @@
-package com.nmefc.observice_service.bean;
+package com.nmefc.observe_service.bean;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -226,73 +226,73 @@ public class BuoyDataExample {
             return (Criteria) this;
         }
 
-        public Criteria andTimeIsNull() {
-            addCriterion("time is null");
+        public Criteria andRecordTimeIsNull() {
+            addCriterion("record_time is null");
             return (Criteria) this;
         }
 
-        public Criteria andTimeIsNotNull() {
-            addCriterion("time is not null");
+        public Criteria andRecordTimeIsNotNull() {
+            addCriterion("record_time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTimeEqualTo(String value) {
-            addCriterion("time =", value, "time");
+        public Criteria andRecordTimeEqualTo(String value) {
+            addCriterion("record_time =", value, "recordTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeNotEqualTo(String value) {
-            addCriterion("time <>", value, "time");
+        public Criteria andRecordTimeNotEqualTo(String value) {
+            addCriterion("record_time <>", value, "recordTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeGreaterThan(String value) {
-            addCriterion("time >", value, "time");
+        public Criteria andRecordTimeGreaterThan(String value) {
+            addCriterion("record_time >", value, "recordTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeGreaterThanOrEqualTo(String value) {
-            addCriterion("time >=", value, "time");
+        public Criteria andRecordTimeGreaterThanOrEqualTo(String value) {
+            addCriterion("record_time >=", value, "recordTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeLessThan(String value) {
-            addCriterion("time <", value, "time");
+        public Criteria andRecordTimeLessThan(String value) {
+            addCriterion("record_time <", value, "recordTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeLessThanOrEqualTo(String value) {
-            addCriterion("time <=", value, "time");
+        public Criteria andRecordTimeLessThanOrEqualTo(String value) {
+            addCriterion("record_time <=", value, "recordTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeLike(String value) {
-            addCriterion("time like", value, "time");
+        public Criteria andRecordTimeLike(String value) {
+            addCriterion("record_time like", value, "recordTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeNotLike(String value) {
-            addCriterion("time not like", value, "time");
+        public Criteria andRecordTimeNotLike(String value) {
+            addCriterion("record_time not like", value, "recordTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeIn(List<String> values) {
-            addCriterion("time in", values, "time");
+        public Criteria andRecordTimeIn(List<String> values) {
+            addCriterion("record_time in", values, "recordTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeNotIn(List<String> values) {
-            addCriterion("time not in", values, "time");
+        public Criteria andRecordTimeNotIn(List<String> values) {
+            addCriterion("record_time not in", values, "recordTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeBetween(String value1, String value2) {
-            addCriterion("time between", value1, value2, "time");
+        public Criteria andRecordTimeBetween(String value1, String value2) {
+            addCriterion("record_time between", value1, value2, "recordTime");
             return (Criteria) this;
         }
 
-        public Criteria andTimeNotBetween(String value1, String value2) {
-            addCriterion("time not between", value1, value2, "time");
+        public Criteria andRecordTimeNotBetween(String value1, String value2) {
+            addCriterion("record_time not between", value1, value2, "recordTime");
             return (Criteria) this;
         }
 
@@ -366,63 +366,63 @@ public class BuoyDataExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateIsNull() {
-            addCriterion("create is null");
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("create_time is null");
             return (Criteria) this;
         }
 
-        public Criteria andCreateIsNotNull() {
-            addCriterion("create is not null");
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("create_time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCreateEqualTo(Date value) {
-            addCriterion("create =", value, "create");
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("create_time =", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateNotEqualTo(Date value) {
-            addCriterion("create <>", value, "create");
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("create_time <>", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateGreaterThan(Date value) {
-            addCriterion("create >", value, "create");
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("create_time >", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateGreaterThanOrEqualTo(Date value) {
-            addCriterion("create >=", value, "create");
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_time >=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateLessThan(Date value) {
-            addCriterion("create <", value, "create");
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("create_time <", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateLessThanOrEqualTo(Date value) {
-            addCriterion("create <=", value, "create");
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("create_time <=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateIn(List<Date> values) {
-            addCriterion("create in", values, "create");
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("create_time in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateNotIn(List<Date> values) {
-            addCriterion("create not in", values, "create");
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("create_time not in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateBetween(Date value1, Date value2) {
-            addCriterion("create between", value1, value2, "create");
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("create_time between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateNotBetween(Date value1, Date value2) {
-            addCriterion("create not between", value1, value2, "create");
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
@@ -726,63 +726,63 @@ public class BuoyDataExample {
             return (Criteria) this;
         }
 
-        public Criteria andAtIsNull() {
-            addCriterion("at is null");
+        public Criteria andAttIsNull() {
+            addCriterion("att is null");
             return (Criteria) this;
         }
 
-        public Criteria andAtIsNotNull() {
-            addCriterion("at is not null");
+        public Criteria andAttIsNotNull() {
+            addCriterion("att is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAtEqualTo(BigDecimal value) {
-            addCriterion("at =", value, "at");
+        public Criteria andAttEqualTo(BigDecimal value) {
+            addCriterion("att =", value, "att");
             return (Criteria) this;
         }
 
-        public Criteria andAtNotEqualTo(BigDecimal value) {
-            addCriterion("at <>", value, "at");
+        public Criteria andAttNotEqualTo(BigDecimal value) {
+            addCriterion("att <>", value, "att");
             return (Criteria) this;
         }
 
-        public Criteria andAtGreaterThan(BigDecimal value) {
-            addCriterion("at >", value, "at");
+        public Criteria andAttGreaterThan(BigDecimal value) {
+            addCriterion("att >", value, "att");
             return (Criteria) this;
         }
 
-        public Criteria andAtGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("at >=", value, "at");
+        public Criteria andAttGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("att >=", value, "att");
             return (Criteria) this;
         }
 
-        public Criteria andAtLessThan(BigDecimal value) {
-            addCriterion("at <", value, "at");
+        public Criteria andAttLessThan(BigDecimal value) {
+            addCriterion("att <", value, "att");
             return (Criteria) this;
         }
 
-        public Criteria andAtLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("at <=", value, "at");
+        public Criteria andAttLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("att <=", value, "att");
             return (Criteria) this;
         }
 
-        public Criteria andAtIn(List<BigDecimal> values) {
-            addCriterion("at in", values, "at");
+        public Criteria andAttIn(List<BigDecimal> values) {
+            addCriterion("att in", values, "att");
             return (Criteria) this;
         }
 
-        public Criteria andAtNotIn(List<BigDecimal> values) {
-            addCriterion("at not in", values, "at");
+        public Criteria andAttNotIn(List<BigDecimal> values) {
+            addCriterion("att not in", values, "att");
             return (Criteria) this;
         }
 
-        public Criteria andAtBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("at between", value1, value2, "at");
+        public Criteria andAttBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("att between", value1, value2, "att");
             return (Criteria) this;
         }
 
-        public Criteria andAtNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("at not between", value1, value2, "at");
+        public Criteria andAttNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("att not between", value1, value2, "att");
             return (Criteria) this;
         }
 
