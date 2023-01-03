@@ -41,7 +41,7 @@ public class BuoyDataController {
         List<BuoyData> buoyDataList = buoyService.loadOneBuoy(name,days);
         //数据库未查到时
         if (null == buoyDataList || buoyDataList.size() < 1){
-            return errorParameterMessage(loadOneBuoyResult,commonResultCode);
+            return nullParameterMessage(loadOneBuoyResult,commonResultCode);
         }
 
         commonResultCode.setCode("100");
@@ -56,6 +56,11 @@ public class BuoyDataController {
         loadOneBuoyResult.setCommonResultCode(commonResultCode);
         return loadOneBuoyResult;
     }
-
+    private LoadOneBuoyResult nullParameterMessage(LoadOneBuoyResult loadOneBuoyResult, CommonResultCode commonResultCode) {
+        commonResultCode.setCode("500");
+        commonResultCode.setMessage("所选时间范围无数据");
+        loadOneBuoyResult.setCommonResultCode(commonResultCode);
+        return loadOneBuoyResult;
+    }
 
 }
