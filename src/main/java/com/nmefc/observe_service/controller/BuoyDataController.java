@@ -5,6 +5,7 @@ import com.nmefc.observe_service.bean.responseBean.CommonResultCode;
 import com.nmefc.observe_service.bean.responseBean.LoadOneBuoyResult;
 import com.nmefc.observe_service.service.BuoyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ import java.util.List;
  * @Date 2023/1/3 21:05
  * @Author Qu Yuan
  **/
-//@CrossOrigin
+@CrossOrigin
 @RestController
 @RequestMapping("/buoy")
 public class BuoyDataController {

@@ -6,11 +6,10 @@ import com.nmefc.observe_service.bean.BuoyDataExample;
 import com.nmefc.observe_service.mapper.BuoyDataMapper;
 import com.nmefc.observe_service.service.BuoyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-@Service("buoyDataService")
+@org.springframework.stereotype.Service("buoyDataService")
 public class BuoyDataServiceImp implements BuoyService {
     @Autowired
     BuoyDataMapper buoyDataMapper;

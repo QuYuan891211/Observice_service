@@ -10,7 +10,7 @@ public class ObserveConfig {
 
     private Byte isDelete;
 
-    private Date create;
+    private Date createTime;
 
     private Date modified;
 
@@ -48,12 +48,12 @@ public class ObserveConfig {
         this.isDelete = isDelete;
     }
 
-    public Date getCreate() {
-        return create;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate(Date create) {
-        this.create = create;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Date getModified() {
