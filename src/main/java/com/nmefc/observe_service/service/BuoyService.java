@@ -4,7 +4,9 @@ package com.nmefc.observe_service.service;
 
 import com.nmefc.observe_service.bean.BuoyData;
 import com.nmefc.observe_service.bean.BuoyDataExample;
+import org.springframework.lang.Nullable;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -14,9 +16,16 @@ import java.util.List;
  **/
 public interface BuoyService extends BaseService<BuoyData, BuoyDataExample> {
     /**
-     * 获取最新单个浮标的数据（30天数据）
+     * 获取浮标的指定最近天数据(指定或全部)
      * @param name
      * @return
      */
-    List<BuoyData> loadOneBuoy(String name, Integer days);
+    List<BuoyData> loadLastData(Integer days, String name) throws ParseException;
+
+    /**
+     * 获取全部浮标的最近天数据数据
+     * @param days
+     * @return
+     */
+//    List<BuoyData> loadAllBuoy(Integer days);
 }

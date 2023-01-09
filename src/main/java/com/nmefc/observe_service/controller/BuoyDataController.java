@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -30,8 +31,8 @@ public class BuoyDataController {
      * @param days
      * @return
      */
-    @GetMapping("/lastSingleData")
-    public LoadOneBuoyResult LastSingleData(String name, Integer days){
+    @GetMapping("/lastSingle")
+    public LoadOneBuoyResult lastSingleData(Integer days, String name){
         LoadOneBuoyResult loadOneBuoyResult = new LoadOneBuoyResult();
         CommonResultCode commonResultCode = new CommonResultCode();
         //传入参数为空时，返回错误信息
@@ -39,7 +40,43 @@ public class BuoyDataController {
            return errorParameterMessage(loadOneBuoyResult,commonResultCode);
         }
 
-        List<BuoyData> buoyDataList = buoyService.loadOneBuoy(name,days);
+        List<BuoyData> buoyDataList = null;
+        try {
+            buoyDataList = buoyService.loadLastData(days,name);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        //数据库未查到时
+        if (null == buoyDataList || buoyDataList.size() < 1){
+            return nullParameterMessage(loadOneBuoyResult,commonResultCode);
+        }
+
+        commonResultCode.setCode("100");
+        commonResultCode.setMessage("查询成功");
+        loadOneBuoyResult.setCommonResultCode(commonResultCode);
+        loadOneBuoyResult.setBuoyDataList(buoyDataList);
+        return loadOneBuoyResult;
+    }
+
+    /**
+     * 获取全部浮标，最近days天（days为传入参数）的浮标数据
+     * @param days
+     * @return
+     */
+    @GetMapping("/lastAll")
+    public LoadOneBuoyResult LastAllData(Integer days){
+        LoadOneBuoyResult loadOneBuoyResult = new LoadOneBuoyResult();
+        CommonResultCode commonResultCode = new CommonResultCode();
+        //传入参数为空时，返回错误信息
+        if(null == days || days > 30){
+            return errorParameterMessage(loadOneBuoyResult,commonResultCode);
+        }
+        List<BuoyData> buoyDataList = null;
+        try {
+            buoyDataList = buoyService.loadLastData(days,null);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         //数据库未查到时
         if (null == buoyDataList || buoyDataList.size() < 1){
             return nullParameterMessage(loadOneBuoyResult,commonResultCode);

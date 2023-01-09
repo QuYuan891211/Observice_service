@@ -7,6 +7,9 @@ import com.nmefc.observe_service.mapper.BuoyDataMapper;
 import com.nmefc.observe_service.service.BuoyService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @org.springframework.stereotype.Service("buoyDataService")
@@ -20,10 +23,13 @@ public class BuoyDataServiceImp implements BuoyService {
 
 
     @Override
-    public List<BuoyData> loadOneBuoy(String name, Integer days) {
+    public List<BuoyData> loadLastData(Integer days,String name) throws ParseException {
         List<BuoyData> buoyDataArrayList = new ArrayList<>();
-        //获取当前日期
-        Date end = new Date();
+        //TODO：生产环境中需要注释：开发环境指定当前日期
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date end = dateFormat.parse("2023-01-06 12:43:21");
+        //TODO：生产环境中需要取消此注释：获取当前日期
+//        Date end = new Date();
         //创建Calendar实例
         Calendar cal = Calendar.getInstance();
         //设置当前时间
@@ -36,7 +42,10 @@ public class BuoyDataServiceImp implements BuoyService {
         BuoyDataExample buoyDataExample = new BuoyDataExample();
         BuoyDataExample.Criteria criteria =  buoyDataExample.createCriteria();
         //检索浮标名称等于传入的name，并且时间在传入时间前days天的数据
-        criteria.andSiteEqualTo(name).andQueryTimeBetween(start,end);
+        if(null != name){
+            criteria.andSiteEqualTo(name);
+        }
+        criteria.andQueryTimeBetween(start,end);
         try{
             buoyDataArrayList = getDataByQuery(buoyDataExample);
         }catch (Exception e){
@@ -44,4 +53,6 @@ public class BuoyDataServiceImp implements BuoyService {
         }
         return buoyDataArrayList;
     }
+
+
 }
