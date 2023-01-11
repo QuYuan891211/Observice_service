@@ -1,5 +1,7 @@
 package com.nmefc.observe_service.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -48,6 +50,7 @@ public class ObserveConfig {
         this.isDelete = isDelete;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getCreateTime() {
         return createTime;
     }
@@ -56,6 +59,7 @@ public class ObserveConfig {
         this.createTime = createTime;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getModified() {
         return modified;
     }
