@@ -54,5 +54,27 @@ public class BuoyDataServiceImp implements BuoyService {
         return buoyDataArrayList;
     }
 
+    /**
+     * 获取指定浮标的指定时间段的数据
+     * @param start
+     * @param end
+     * @param name
+     * @return
+     */
+    @Override
+    public List<BuoyData> query(Date start, Date end, String name) {
+        List<BuoyData> buoyDataArrayList = new ArrayList<>();
+        BuoyDataExample buoyDataExample = new BuoyDataExample();
+        BuoyDataExample.Criteria criteria =  buoyDataExample.createCriteria();
+        criteria.andSiteEqualTo(name);
+        criteria.andQueryTimeBetween(start,end);
+        try{
+            buoyDataArrayList = getDataByQuery(buoyDataExample);
+        }catch (Exception e){
+            throw e;
+        }
+        return buoyDataArrayList;
+    }
+
 
 }
