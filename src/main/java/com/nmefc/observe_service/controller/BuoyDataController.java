@@ -3,6 +3,7 @@ package com.nmefc.observe_service.controller;
 import com.nmefc.observe_service.bean.BuoyData;
 import com.nmefc.observe_service.bean.responseBean.CommonResultCode;
 import com.nmefc.observe_service.bean.responseBean.LoadOneBuoyResult;
+import com.nmefc.observe_service.bean.responseBean.StatisticsResult;
 import com.nmefc.observe_service.service.BuoyService;
 import com.nmefc.observe_service.utils.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class BuoyDataController {
             startTime = TimeUtils.UTCToCST(start, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
             endTime = TimeUtils.UTCToCST(end, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
             Integer differ = TimeUtils.getDayDiffer(startTime,endTime);
-            if(30 < differ){
+            if(31 < differ){
                 return errorDateRange(loadOneBuoyResult,commonResultCode);
             }
         } catch (ParseException e) {
@@ -85,7 +86,7 @@ public class BuoyDataController {
         if(null == name || null == days){
            return errorParameterMessage(loadOneBuoyResult,commonResultCode);
         }
-        if(30 < days){
+        if(31 < days){
             return errorDateRange(loadOneBuoyResult,commonResultCode);
         }
         List<BuoyData> buoyDataList = null;
@@ -119,7 +120,7 @@ public class BuoyDataController {
         if(null == days){
             return errorParameterMessage(loadOneBuoyResult,commonResultCode);
         }
-        if(30 < days){
+        if(31 < days){
             return errorDateRange(loadOneBuoyResult,commonResultCode);
         }
         List<BuoyData> buoyDataList = null;
@@ -132,10 +133,65 @@ public class BuoyDataController {
         if (null == buoyDataList || buoyDataList.size() < 1){
             return nullDataMessage(loadOneBuoyResult,commonResultCode, "最近" + days.toString() + "天");
         }
+
+
         commonResultCode.setCode("100");
         commonResultCode.setMessage("查询成功");
         loadOneBuoyResult.setCommonResultCode(commonResultCode);
         loadOneBuoyResult.setBuoyDataList(buoyDataList);
+        return loadOneBuoyResult;
+    }
+
+    /**
+     * 统计到报情况
+     * @return
+     * @throws ParseException
+     */
+    @GetMapping("/statistics")
+    public StatisticsResult statistics() throws ParseException {
+        StatisticsResult statisticsResult = new StatisticsResult();
+        CommonResultCode commonResultCode = new CommonResultCode();
+
+        Long num = buoyService.statisticsNow();
+        //数据库未查到时
+        if (null == num){
+            return errorSystem(statisticsResult,commonResultCode);
+        }
+        commonResultCode.setCode("100");
+        commonResultCode.setMessage("查询成功");
+        statisticsResult.setCommonResultCode(commonResultCode);
+        statisticsResult.setNum(num);
+        return statisticsResult;
+    }
+    /**
+     * 获取全部浮标，最近days天（days为传入参数）的浮标数据,并返回每个浮标最新的数据
+     * @param days
+     * @return
+     */
+    @GetMapping("/filterlastAll")
+    public LoadOneBuoyResult filterLastAllData(Integer days) throws ParseException {
+        LoadOneBuoyResult loadOneBuoyResult = new LoadOneBuoyResult();
+        CommonResultCode commonResultCode = new CommonResultCode();
+        //传入参数为空时，返回错误信息
+        if(null == days){
+            return errorParameterMessage(loadOneBuoyResult,commonResultCode);
+        }
+        if(31 < days){
+            return errorDateRange(loadOneBuoyResult,commonResultCode);
+        }
+        List<BuoyData> buoyDataList = null;
+        buoyDataList = buoyService.loadLastDataWithZBGData(days,null);
+        //数据库未查到时
+        if (null == buoyDataList || buoyDataList.size() < 1){
+            return nullDataMessage(loadOneBuoyResult,commonResultCode, "最近" + days.toString() + "天");
+        }
+
+        List<BuoyData> filterList = null;
+        filterList = buoyService.filterLastOneData(buoyDataList);
+        commonResultCode.setCode("100");
+        commonResultCode.setMessage("查询成功");
+        loadOneBuoyResult.setCommonResultCode(commonResultCode);
+        loadOneBuoyResult.setBuoyDataList(filterList);
         return loadOneBuoyResult;
     }
     private LoadOneBuoyResult errorParameterMessage(LoadOneBuoyResult loadOneBuoyResult, CommonResultCode commonResultCode) {
@@ -152,10 +208,17 @@ public class BuoyDataController {
     }
 
     private LoadOneBuoyResult errorDateRange(LoadOneBuoyResult loadOneBuoyResult, CommonResultCode commonResultCode) {
-        commonResultCode.setCode("500");
-        commonResultCode.setMessage("暂不支持检索时间范围超过30天，请重新选择时间");
+        commonResultCode.setCode("600");
+        commonResultCode.setMessage("暂不支持检索时间范围超过1个月，请重新选择时间");
         loadOneBuoyResult.setCommonResultCode(commonResultCode);
         return loadOneBuoyResult;
+    }
+
+    private StatisticsResult errorSystem(StatisticsResult statisticsResult, CommonResultCode commonResultCode) {
+        commonResultCode.setCode("700");
+        commonResultCode.setMessage("发生未知错误，请联系系统管理员");
+        statisticsResult.setCommonResultCode(commonResultCode);
+        return statisticsResult;
     }
 
 }

@@ -27,7 +27,7 @@ public class BuoyDataServiceImp implements BuoyService {
         List<BuoyData> buoyDataArrayList = new ArrayList<>();
         //TODO：生产环境中需要注释：开发环境指定当前日期
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date end = dateFormat.parse("2023-01-06 12:43:21");
+        Date end = dateFormat.parse("2023-01-06 13:43:21");
         //TODO：生产环境中需要取消此注释：获取当前日期
 //        Date end = new Date();
         //创建Calendar实例
@@ -55,6 +55,77 @@ public class BuoyDataServiceImp implements BuoyService {
     }
 
     /**
+     * 获取各个浮标最新的且有效波高有的数据
+     * @param days
+     * @param name
+     * @return
+     */
+    @Override
+    public List<BuoyData> loadLastDataWithZBGData(Integer days,String name) throws ParseException {
+        List<BuoyData> buoyDataArrayList = new ArrayList<>();
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //TODO：生产环境中需要注释：开发环境指定当前日期
+        Date end = dateFormat.parse("2023-01-06 13:43:21");
+        //TODO：生产环境中需要取消此注释：获取当前日期
+        //String datestr = dateFormat.format(new Date());
+        //Date end = dateFormat.parse(datestr);
+        //创建Calendar实例
+        Calendar cal = Calendar.getInstance();
+        //设置当前时间
+        cal.setTime(end);
+        cal.set(Calendar.DATE, cal.get(Calendar.DATE) - days);
+        //获取days天前的日期：此时end为当前系统时间，start为days天前时间
+        Date start = cal.getTime();
+
+
+        BuoyDataExample buoyDataExample = new BuoyDataExample();
+        BuoyDataExample.Criteria criteria =  buoyDataExample.createCriteria();
+        //检索浮标名称等于传入的name，并且时间在传入时间前days天的数据
+        if(null != name){
+            criteria.andSiteEqualTo(name);
+        }
+        criteria.andQueryTimeBetween(start,end);
+        criteria.andZbgIsNotNull();
+        try{
+            buoyDataArrayList = getDataByQuery(buoyDataExample);
+        }catch (Exception e){
+            throw e;
+        }
+        return buoyDataArrayList;
+    }
+
+    /**
+     * 统计到报情况
+     * @return
+     * @throws ParseException
+     */
+    @Override
+    public Long statisticsNow() throws ParseException {
+        Long num;
+//        Statistic statistic = new Statistic();
+//        List<BuoyData> buoyDataArrayList = new ArrayList<>();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH");
+        //TODO：生产环境中需要注释：开发环境指定当前日期
+        Date end = dateFormat.parse("2023-01-06 13:43:21");
+        //TODO：生产环境中需要取消此注释：获取当前日期
+        //String datestr = dateFormat.format(new Date());
+        //Date end = dateFormat.parse(datestr);
+        BuoyDataExample buoyDataExample = new BuoyDataExample();
+        BuoyDataExample.Criteria criteria =  buoyDataExample.createCriteria();
+        criteria.andQueryTimeEqualTo(end);
+        try{
+            num = buoyDataMapper.countByExample(buoyDataExample);
+        }catch (Exception e){
+            throw e;
+        }
+
+
+
+        return num;
+    }
+
+    /**
      * 获取指定浮标的指定时间段的数据
      * @param start
      * @param end
@@ -74,6 +145,30 @@ public class BuoyDataServiceImp implements BuoyService {
             throw e;
         }
         return buoyDataArrayList;
+    }
+
+    @Override
+    public List<BuoyData> filterLastOneData(List<BuoyData> buoyDataList) {
+        List<BuoyData> filterList = new ArrayList<BuoyData>();
+        Collections.reverse(buoyDataList);
+        //去重
+        Set<BuoyData> set = new TreeSet<BuoyData>(new Comparator<BuoyData>(){
+            @Override
+            public int compare(BuoyData a, BuoyData b) {
+                return a.getSite().compareTo(b.getSite());
+            }
+        });
+        set.addAll(buoyDataList);
+        filterList = new ArrayList<BuoyData>(set);
+        filterList.sort(new Comparator<BuoyData>() {
+            @Override
+            public int compare(BuoyData buoyData1, BuoyData buoyData2) {
+                String site1 = buoyData1.getSite();
+                String site2 = buoyData2.getSite();
+                return site1.compareTo(site2);
+            }
+        });
+    return filterList;
     }
 
 
