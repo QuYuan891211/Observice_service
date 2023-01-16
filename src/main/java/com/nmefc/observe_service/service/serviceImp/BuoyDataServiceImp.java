@@ -111,9 +111,17 @@ public class BuoyDataServiceImp implements BuoyService {
         //TODO：生产环境中需要取消此注释：获取当前日期
         //String datestr = dateFormat.format(new Date());
         //Date end = dateFormat.parse(datestr);
+
+        //创建Calendar实例
+        Calendar cal = Calendar.getInstance();
+        //设置当前时间
+        cal.setTime(end);
+        cal.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY) - 1);
+        //获取days天前的日期：此时end为当前系统时间，start为days天前时间
+        Date target = cal.getTime();
         BuoyDataExample buoyDataExample = new BuoyDataExample();
         BuoyDataExample.Criteria criteria =  buoyDataExample.createCriteria();
-        criteria.andQueryTimeEqualTo(end);
+        criteria.andQueryTimeEqualTo(target);
         try{
             num = buoyDataMapper.countByExample(buoyDataExample);
         }catch (Exception e){
