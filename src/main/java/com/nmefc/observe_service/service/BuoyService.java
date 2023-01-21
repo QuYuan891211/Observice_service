@@ -43,6 +43,7 @@ public interface BuoyService extends BaseService<BuoyData, BuoyDataExample> {
 
     /**
      * 获取各个浮标最新的且有效波高有数的
+     * TODO：暂时取消有效波高的数据设定，考虑到气象使用
      * @param days
      * @param name
      * @return

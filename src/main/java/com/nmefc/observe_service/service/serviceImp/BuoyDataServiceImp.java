@@ -86,7 +86,7 @@ public class BuoyDataServiceImp implements BuoyService {
             criteria.andSiteEqualTo(name);
         }
         criteria.andQueryTimeBetween(start,end);
-        criteria.andZbgIsNotNull();
+//        criteria.andZbgIsNotNull();
         try{
             buoyDataArrayList = getDataByQuery(buoyDataExample);
         }catch (Exception e){
