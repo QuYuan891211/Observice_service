@@ -68,8 +68,8 @@ public class BuoyDataServiceImp implements BuoyService {
         //TODO：生产环境中需要注释：开发环境指定当前日期
         Date end = dateFormat.parse("2023-01-06 13:43:21");
         //TODO：生产环境中需要取消此注释：获取当前日期
-        //String datestr = dateFormat.format(new Date());
-        //Date end = dateFormat.parse(datestr);
+//        String datestr = dateFormat.format(new Date());
+//        Date end = dateFormat.parse(datestr);
         //创建Calendar实例
         Calendar cal = Calendar.getInstance();
         //设置当前时间
@@ -109,8 +109,8 @@ public class BuoyDataServiceImp implements BuoyService {
         //TODO：生产环境中需要注释：开发环境指定当前日期
         Date end = dateFormat.parse("2023-01-06 13:43:21");
         //TODO：生产环境中需要取消此注释：获取当前日期
-        //String datestr = dateFormat.format(new Date());
-        //Date end = dateFormat.parse(datestr);
+//        String datestr = dateFormat.format(new Date());
+//        Date end = dateFormat.parse(datestr);
 
         //创建Calendar实例
         Calendar cal = Calendar.getInstance();
