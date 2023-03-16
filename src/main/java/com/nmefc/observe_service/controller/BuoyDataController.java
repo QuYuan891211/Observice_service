@@ -30,6 +30,40 @@ public class BuoyDataController {
     BuoyService buoyService;
 
     /**
+     * 查询某历史时刻所有浮标数据
+     * @param time
+     * @return
+     */
+    @GetMapping("/queryAll")
+    public LoadOneBuoyResult queryAll(String time){
+        LoadOneBuoyResult loadOneBuoyResult = new LoadOneBuoyResult();
+        CommonResultCode commonResultCode = new CommonResultCode();
+        if( null == time){
+            return errorParameterMessage(loadOneBuoyResult,commonResultCode);
+        }
+        Date datetime;
+        try {
+            datetime = TimeUtils.UTCToCST(time, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        List<BuoyData> buoyDataList = null;
+        buoyDataList = buoyService.queryAll(datetime);
+        //数据库未查到时
+        if (null == buoyDataList || buoyDataList.size() < 1){
+            SimpleDateFormat f = new SimpleDateFormat("yyyy年MM月dd日HH时mm分ss秒");
+//            String timeMessage = f.format(startTime) + "-" + f.format(endTime);
+            String timeMessage = "所选时间";
+            return nullDataMessage(loadOneBuoyResult,commonResultCode,timeMessage);
+        }
+        commonResultCode.setCode("100");
+        commonResultCode.setMessage("查询成功");
+        loadOneBuoyResult.setCommonResultCode(commonResultCode);
+        loadOneBuoyResult.setBuoyDataList(buoyDataList);
+        return loadOneBuoyResult;
+    }
+    /**
      * 用户自定义时间查询单一浮标数据
      * @param start
      * @param end

@@ -55,4 +55,11 @@ public interface BuoyService extends BaseService<BuoyData, BuoyDataExample> {
      * @return
      */
     Long statisticsNow() throws ParseException;
+
+    /**
+     * 获取指定时间的全部浮标数据
+     * @param time
+     * @return
+     */
+    List<BuoyData> queryAll(Date time);
 }

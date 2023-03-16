@@ -25,11 +25,14 @@ public class BuoyDataServiceImp implements BuoyService {
     @Override
     public List<BuoyData> loadLastData(Integer days,String name) throws ParseException {
         List<BuoyData> buoyDataArrayList = new ArrayList<>();
+
         //TODO：生产环境中需要注释：开发环境指定当前日期
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date end = dateFormat.parse("2023-01-06 13:43:21");
+
         //TODO：生产环境中需要取消此注释：获取当前日期
 //        Date end = new Date();
+
         //创建Calendar实例
         Calendar cal = Calendar.getInstance();
         //设置当前时间
@@ -65,11 +68,14 @@ public class BuoyDataServiceImp implements BuoyService {
         List<BuoyData> buoyDataArrayList = new ArrayList<>();
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         //TODO：生产环境中需要注释：开发环境指定当前日期
         Date end = dateFormat.parse("2023-01-06 13:43:21");
+
         //TODO：生产环境中需要取消此注释：获取当前日期
 //        String datestr = dateFormat.format(new Date());
 //        Date end = dateFormat.parse(datestr);
+
         //创建Calendar实例
         Calendar cal = Calendar.getInstance();
         //设置当前时间
@@ -106,8 +112,10 @@ public class BuoyDataServiceImp implements BuoyService {
 //        Statistic statistic = new Statistic();
 //        List<BuoyData> buoyDataArrayList = new ArrayList<>();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH");
+
         //TODO：生产环境中需要注释：开发环境指定当前日期
         Date end = dateFormat.parse("2023-01-06 13:43:21");
+
         //TODO：生产环境中需要取消此注释：获取当前日期
 //        String datestr = dateFormat.format(new Date());
 //        Date end = dateFormat.parse(datestr);
@@ -133,6 +141,24 @@ public class BuoyDataServiceImp implements BuoyService {
         return num;
     }
 
+    /**
+     * 获取指定时刻的全部浮标数据
+     * @param time
+     * @return
+     */
+    @Override
+    public List<BuoyData> queryAll(Date time) {
+        List<BuoyData> buoyDataArrayList = new ArrayList<>();
+        BuoyDataExample buoyDataExample = new BuoyDataExample();
+        BuoyDataExample.Criteria criteria =  buoyDataExample.createCriteria();
+        criteria.andQueryTimeEqualTo(time);
+        try{
+            buoyDataArrayList = getDataByQuery(buoyDataExample);
+        }catch (Exception e){
+            throw e;
+        }
+        return buoyDataArrayList;
+    }
     /**
      * 获取指定浮标的指定时间段的数据
      * @param start
